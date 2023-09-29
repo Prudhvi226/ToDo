@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        body{
+            font-family: 'Mooli', sans-serif;
+        }
+        .maintodo{
+            height: 400px;
+            width: 600px;
+            position: absolute;
+            left: 450px;
+            top: 100px;
+            background-color: blueviolet;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        ul li{
+            list-style: none;
+            font-size: 17px;
+            padding: 12px 8px 12px 50px;
+            user-select: none;
+            cursor: pointer;
+            position: relative;
+            color: white;
+        }
+        ul li::before{
+            content: '';
+            position: absolute;
+            height: 28px;
+            width: 28px;
+            border-radius: 50%;
+            background-image: url("https://cdn4.iconfinder.com/data/icons/materia-flat-interface-vol-2/24/008_083_radio_button_unchecked_control-512.png");
+            background-size: cover;
+            background-position: center;
+            top: 7px;
+            left: 12px;        
+    }
+    h3{
+        margin-left: 110px;
+        font-size: 30px;
+        font-weight: 200px;
+    }
+    input{
+        height: 35px;
+        width: 300px;
+        border-radius: 25px;
+        border: none;
+        text-indent: 16px;
+    }
+    button{
+        border-radius: 25px;
+        height: 35px;
+        width: 70px;
+        background-color: white;
+        border: none;
+        cursor: pointer;
+        background-color: rgb(184, 146, 225);
+        margin-left: 3px;
+    }
+    ul li.checked{
+        text-decoration: line-through;
+    }
+    ul li.checked::before{
+        background-image: url("https://cdn-icons-png.flaticon.com/512/7079/7079978.png");
+    }
+    ul li span{
+        position: absolute;
+        right: 0;
+        top: 5px;
+        width: 40px;
+        height: 40px;
+        font-size: 22px;
+        line-height: 40px;
+        text-align: center;
+        border-radius: 50%;
+    }
+    </style>
+    <head>
+        <title>To-Do List</title>
+    </head>
+    <body>
+        <div class="maintodo">
+            <div class="items">
+                <h3>To-Do List</h3>
+                <div class="bar">
+                    <input type="text" id="addbar" placeholder="Add your items">
+                    <button type="submit" onclick="addTask()">Add</button>
+                </div>
+                <ul id="tasks">
+                    <!-- <li class="checked">Task 1</li>
+                    <li>Task 2</li>
+                    <li>Task 3</li> -->
+                </ul>
+            </div>
+        </div>
+    <script>
+         const AddBar = document.getElementById("addbar");
+         const Tasks = document.getElementById("tasks");
+
+         function addTask(){
+            if(AddBar.value === ''){
+                alert("Type something!");
+            }
+            else{
+                let li = document.createElement("li");
+                li.innerHTML = AddBar.value;
+                Tasks.appendChild(li);
+                let span = document.createElement("span");
+                span.innerHTML = "\u00d7";
+                li.appendChild(span);
+            }
+            AddBar.value = "";
+         }
+
+         Tasks.addEventListener("click", function(e){
+            if(e.target.tagName === "LI"){
+                e.target.classList.toggle("checked");
+            }
+            else if(e.target.tagName === "SPAN"){
+                e.target.parentElement.remove();
+            }
+         },false);
+    </script>    
+    </body>
+</html>
